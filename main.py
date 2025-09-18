@@ -6,11 +6,11 @@ from scipy.optimize import minimize
 from matplotlib.colors import LinearSegmentedColormap
 
 calibration_pkl_path = "calibration_files.pkl"
-inference_pkl_path = "pokemon.pkl"
+inference_pkl_path = "DatasetFormat/CVPR.pkl"
 parameters = [11.87780144, 13.68435359] 
 crop_size = (440, 565)
 training_flag = int(input("Calibration (1) or Inference (0)?: "))
-percentile_threshold = 60
+percentile_threshold = 40
 
 # custom colormap to match the color palette of the paper
 colors = ['purple', 'blue', 'teal', 'yellow', 'red']
@@ -236,7 +236,7 @@ def validate_depth():
     ground_truth = cv2.flip(ground_truth, -1) * true_confidence_map
     # for white background
     ground_truth = np.ma.masked_where(ground_truth == 0, ground_truth)
-    ground_truth = ground_truth[0:crop_size[0], 0:crop_size[1]]
+    ground_truth = ground_truth[5:crop_size[0], 5:crop_size[1]]
 
 
     # show side by side
